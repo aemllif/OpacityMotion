@@ -2,8 +2,8 @@
 //  File.swift
 //  OpacityMotion
 //
-//  Created by Артём Сидоров on 13.05.2025.
-//
+//  Created by Artem S on 13.05.2025.
+// aemllif@icloud.com
 
 #if os(iOS)
 import SwiftUI

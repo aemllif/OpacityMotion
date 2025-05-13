@@ -3,7 +3,7 @@
 //  OpacityMotion
 //
 //  Created by Artem S on 13.05.2025.
-//
+//  aemllif@icloud.com
 
 #if os(iOS)
 import CoreMotion
