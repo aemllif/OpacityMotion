@@ -15,7 +15,7 @@ public struct OpacityMotionView<T, Content: View>: View {
     private let minOpacity: Double
     private let maxOpacity: Double
     private let intensity: Double
-    private let rowSpacing: CGFloat // 👈 Добавлено!
+    private let rowSpacing: CGFloat
 
     @ObservedObject private var motionManager = MotionManager()
 
@@ -23,7 +23,7 @@ public struct OpacityMotionView<T, Content: View>: View {
     private let symbolSettings: [SymbolSettings]
 
     private let pitchWeight = 1.0
-    private let rollWeight = 2.0
+    private let rollWeight = 1.5
 
     public init(
         items: [T],
@@ -36,7 +36,7 @@ public struct OpacityMotionView<T, Content: View>: View {
     ) {
         self.items = items
         self.columns = columns
-        self.rowSpacing = rowSpacing // 👈 Сохраняем значение
+        self.rowSpacing = rowSpacing
         self.content = content
         self.minOpacity = minOpacity
         self.maxOpacity = maxOpacity
