@@ -1,7 +1,9 @@
 
 # 📦 OpacityMotion
 
-`OpacityMotion` is a library for iOS that allows you to animate the **opacity** of elements on the screen based on the device's tilt. It works with **arrays of elements** (texts, images, and other structures) and allows you to customize the **minimum/maximum opacity**, **sensitivity**, and **layout configuration** of the elements.
+`OpacityMotion` is an iOS library that animates the **opacity** of UI elements based on the device's tilt. It works with **arrays of elements** (texts, images, or custom structures) and provides customizable **minimum/maximum opacity**, **sensitivity to motion**, and the ability to adjust **the number of columns** and **spacing** between the elements, allowing for smooth and dynamic visual effects.
+
+> **Note**: **Test on a real device** is required, as motion data is unavailable on the simulator.
 
 ---
 
@@ -40,18 +42,16 @@ struct ContentView: View {
 
     var body: some View {
         OpacityMotionView(
-            items: symbols,
-            columnsCount: 4,
-            columnWidth: 50,
-            columnSpacing: 12,
-            rowSpacing: 16,
-            minOpacity: 0.1,
-            maxOpacity: 0.6,
-            intensity: 1.0
+            items: symbols,  // Array of symbols
+            columns: Array(repeating: GridItem(.fixed(50), spacing: 10), count: 5),  // 5 columns
+            rowSpacing: 12,  // Space between rows
+            minOpacity: 0.1,  // Minimum opacity
+            maxOpacity: 0.6,  // Maximum opacity
+            intensity: 1.0    // Sensitivity to tilt
         ) { symbol in
             Text(symbol)
                 .font(.title2)
-                .frame(width: 40, height: 40)
+                .frame(width: 50, height: 50)
         }
         .padding()
     }
@@ -65,6 +65,7 @@ import SwiftUI
 import OpacityMotion
 
 struct ContentView: View {
+    // Array of images
     let images: [UIImage] = [
         UIImage(named: "image1")!,
         UIImage(named: "image2")!,
@@ -73,50 +74,55 @@ struct ContentView: View {
 
     var body: some View {
         OpacityMotionView(
-            items: images,
-            columnsCount: 3,
-            columnWidth: 100,
-            columnSpacing: 16,
-            rowSpacing: 20,
-            minOpacity: 0.1,
-            maxOpacity: 0.6,
-            intensity: 1.0
+            items: images,  // Array of images
+            columns: Array(repeating: GridItem(.fixed(60), spacing: 8), count: 4),  // 4 columns
+            rowSpacing: 16,  // Space between rows
+            minOpacity: 0.1,  // Minimum opacity
+            maxOpacity: 0.6,  // Maximum opacity
+            intensity: 1.0    // Sensitivity to tilt
         ) { image in
+            // Display images with opacity animation
             Image(uiImage: image)
                 .resizable()
                 .scaledToFit()
-                .frame(height: 100)
+                .frame(width: 100, height: 100)
         }
         .padding()
     }
 }
 ```
 
+### Parameters:
+
+- **items**: An array of elements (can be strings, images, or any other structure).
+- **columns**: An array of `GridItem` elements, used to define the number and width of columns.
+- **rowSpacing**: The vertical spacing between rows (default `12`).
+- **minOpacity**: The minimum opacity of the element (default `0.0`).
+- **maxOpacity**: The maximum opacity of the element (default `0.5`).
+- **intensity**: The sensitivity of the opacity change based on the device's tilt (default `0.7`).
+
 ---
 
 ## 📜 Description
 
-`OpacityMotion` uses **CoreMotion** to track device tilt along the **X** and **Y** axes, and dynamically animates the opacity of individual elements based on that motion.
+`OpacityMotion` uses **CoreMotion** to get the device's tilt data and change the opacity of passed elements based on the device's tilt along the **X** and **Y** axes. 
 
 ### Features:
-- Works with arrays of any type of content: text, images, or custom views.
-- Smooth, per-element opacity animation.
-- Independent behavior for each item.
-- Fully configurable layout (columns, spacing).
-- Adjustable sensitivity and opacity bounds.
+- Supports any data types (texts, images, and other structures).
+- Smooth opacity animation.
+- Configurable minimum and maximum opacity values.
+- Adjustable number of columns and row spacing.
+- High sensitivity to the device's tilt.
 
 ---
 
 ## 🔧 Settings and Parameters
 
-- `items`: An array of your data (e.g. `[String]`, `[UIImage]`, or custom structs).
-- `columnsCount`: Number of columns in the grid (default: `5`).
-- `columnWidth`: Width of each column in points (default: `50`).
-- `columnSpacing`: Horizontal spacing between columns (default: `10`).
-- `rowSpacing`: Vertical spacing between rows (default: `12`).
-- `minOpacity`: Minimum opacity value per item (default: `0.0`).
-- `maxOpacity`: Maximum opacity value per item (default: `0.5`).
-- `intensity`: Controls how strongly tilt affects opacity (default: `0.7`).
+- **`columns`**: Defines the number of columns and their width (default `5` columns with 50pt width and 10pt spacing).
+- **`rowSpacing`**: Vertical space between rows (default `12`).
+- **`minOpacity`**: Minimum opacity (default `0.0`).
+- **`maxOpacity`**: Maximum opacity (default `0.5`).
+- **`intensity`**: Sensitivity of opacity change (default `0.7`).
 
 ---
 
@@ -129,13 +135,13 @@ struct ContentView: View {
 ## 📄 Changelog
 
 ### 🚀 Version 1.0.0
-- Initial release.
-- Per-item opacity animation based on device tilt.
-- Layout customization (columns, spacing).
-- Support for any kind of view content.
+- Initial release of the library.
+- Implemented opacity animation based on the device's tilt.
+- Supports any type of elements for animation (texts, images, and other structures).
+- Added customizable columns and row spacing.
 
 ---
 
 ## 🛠 Feedback and Issues
 
-For suggestions, improvements, or bug reports, please open an issue or submit a pull request on GitHub.
+For suggestions or bug reports, please create issues or pull requests in the repository on GitHub.

@@ -19,7 +19,6 @@ public struct OpacityMotionView<T, Content: View>: View {
     @ObservedObject private var motionManager = MotionManager()
 
     private let columns: [GridItem]
-    private let rowSpacing: CGFloat
     private let symbolSettings: [SymbolSettings]
 
     private let pitchWeight = 1.0
@@ -27,9 +26,7 @@ public struct OpacityMotionView<T, Content: View>: View {
 
     public init(
         items: [T],
-        columnsCount: Int = 5,
-        columnWidth: CGFloat = 50,
-        columnSpacing: CGFloat = 10,
+        columns: [GridItem] = Array(repeating: GridItem(.fixed(50), spacing: 10), count: 5),
         rowSpacing: CGFloat = 12,
         minOpacity: Double = 0.0,
         maxOpacity: Double = 0.5,
@@ -37,8 +34,7 @@ public struct OpacityMotionView<T, Content: View>: View {
         @ViewBuilder content: @escaping (T) -> Content
     ) {
         self.items = items
-        self.columns = Array(repeating: GridItem(.fixed(columnWidth), spacing: columnSpacing), count: columnsCount)
-        self.rowSpacing = rowSpacing
+        self.columns = columns
         self.content = content
         self.minOpacity = minOpacity
         self.maxOpacity = maxOpacity
