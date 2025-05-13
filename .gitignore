@@ -1,0 +1,23 @@
+# Xcode
+.DS_Store
+.idea
+.vscode
+xcuserdata/
+*.xcuserstate
+*.xcworkspace
+DerivedData/
+build/
+
+# Swift Package Manager
+/.build
+# Xcode 11 and newer
+.xcworkspace/xcshareddata/swiftpm/
+
+# CocoaPods
+Pods/
+
+# Carthage
+Carthage/Build/
+
+# SwiftPM
+Packages/
