@@ -14,7 +14,7 @@
 3. Enter the repository URL:
 
    ```
-   https://github.com/YourUsername/OpacityMotion.git
+   https://github.com/aemllif/OpacityMotion.git
    ```
 
 4. Choose the version or branch to connect.
