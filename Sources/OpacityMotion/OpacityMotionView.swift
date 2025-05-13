@@ -3,7 +3,7 @@
 //  OpacityMotion
 //
 //  Created by Artem S on 13.05.2025.
-// aemllif@icloud.com
+//  aemllif@icloud.com
 
 #if os(iOS)
 import SwiftUI
@@ -19,6 +19,7 @@ public struct OpacityMotionView<T, Content: View>: View {
     @ObservedObject private var motionManager = MotionManager()
 
     private let columns: [GridItem]
+    private let rowSpacing: CGFloat
     private let symbolSettings: [SymbolSettings]
 
     private let pitchWeight = 1.0
@@ -26,14 +27,18 @@ public struct OpacityMotionView<T, Content: View>: View {
 
     public init(
         items: [T],
-        columns: [GridItem] = Array(repeating: GridItem(.fixed(50), spacing: 10), count: 5),
+        columnsCount: Int = 5,
+        columnWidth: CGFloat = 50,
+        columnSpacing: CGFloat = 10,
+        rowSpacing: CGFloat = 12,
         minOpacity: Double = 0.0,
         maxOpacity: Double = 0.5,
         intensity: Double = 0.7,
         @ViewBuilder content: @escaping (T) -> Content
     ) {
         self.items = items
-        self.columns = columns
+        self.columns = Array(repeating: GridItem(.fixed(columnWidth), spacing: columnSpacing), count: columnsCount)
+        self.rowSpacing = rowSpacing
         self.content = content
         self.minOpacity = minOpacity
         self.maxOpacity = maxOpacity
@@ -49,7 +54,7 @@ public struct OpacityMotionView<T, Content: View>: View {
     }
 
     public var body: some View {
-        LazyVGrid(columns: columns, spacing: 12) {
+        LazyVGrid(columns: columns, spacing: rowSpacing) {
             ForEach(Array(items.enumerated()), id: \.offset) { index, item in
                 let settings = symbolSettings[index]
                 let opacity = calculateOpacity(for: settings)
